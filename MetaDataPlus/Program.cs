@@ -119,77 +119,20 @@ namespace MetadataPlus
                 }
                 else
                 {
-                    //Doesn't seem to be an inbuilt way to give multiple file types...
-                    //Analyse each xlsx in folder
-                    foreach (string file in Directory.EnumerateFiles(workingFolder + "\\", "*.xlsx", SearchOption.AllDirectories))
+                    string[] fileExtensions = new string[]
                     {
-                        Console.WriteLine("Processing file: " + Path.GetFileName(file));
-                        RunTheJewels(file);
-                    }
-                    //Analyse each xlsm in folder
-                    foreach (string file in Directory.EnumerateFiles(workingFolder + "\\", "*.xlsm", SearchOption.AllDirectories))
+    "*.xlsx", "*.xlsm", "*.xltx", "*.xltm",
+    "*.docx", "*.docm", "*.dotm", "*.dotx",
+    "*.ppt", "*.pptx", "*.potm", "*.potx"
+                    };
+
+                    foreach (string extension in fileExtensions)
                     {
-                        Console.WriteLine("Processing file: " + Path.GetFileName(file));
-                        RunTheJewels(file);
-                    }
-                    //Analyse each xltx in folder
-                    foreach (string file in Directory.EnumerateFiles(workingFolder + "\\", "*.xltx", SearchOption.AllDirectories))
-                    {
-                        RunTheJewels(file);
-                    }
-                    //Analyse each xltm in folder
-                    foreach (string file in Directory.EnumerateFiles(workingFolder + "\\", "*.xltm", SearchOption.AllDirectories))
-                    {
-                        Console.WriteLine("Processing file: " + Path.GetFileName(file));
-                        RunTheJewels(file);
-                    }
-                    //Analyse each docx in folder
-                    foreach (string file in Directory.EnumerateFiles(workingFolder + "\\", "*.docx", SearchOption.AllDirectories))
-                    {
-                        Console.WriteLine("Processing file: " + Path.GetFileName(file));
-                        RunTheJewels(file);
-                    }
-                    //Analyse each docm in folder
-                    foreach (string file in Directory.EnumerateFiles(workingFolder + "\\", "*.docm", SearchOption.AllDirectories))
-                    {
-                        Console.WriteLine("Processing file: " + Path.GetFileName(file));
-                        RunTheJewels(file);
-                    }
-                    //Analyse each dotm in folder
-                    foreach (string file in Directory.EnumerateFiles(workingFolder + "\\", "*.dotm", SearchOption.AllDirectories))
-                    {
-                        Console.WriteLine("Processing file: " + Path.GetFileName(file));
-                        RunTheJewels(file);
-                    }
-                    //Analyse each dotx in folder
-                    foreach (string file in Directory.EnumerateFiles(workingFolder + "\\", "*.dotx", SearchOption.AllDirectories))
-                    {
-                        Console.WriteLine("Processing file: " + Path.GetFileName(file));
-                        RunTheJewels(file);
-                    }
-                    //Analyse each ppt in folder
-                    foreach (string file in Directory.EnumerateFiles(workingFolder + "\\", "*.ppt", SearchOption.AllDirectories))
-                    {
-                        Console.WriteLine("Processing file: " + Path.GetFileName(file));
-                        RunTheJewels(file);
-                    }
-                    //Analyse each pptx in folder
-                    foreach (string file in Directory.EnumerateFiles(workingFolder + "\\", "*.pptx", SearchOption.AllDirectories))
-                    {
-                        Console.WriteLine("Processing file: " + Path.GetFileName(file));
-                        RunTheJewels(file);
-                    }
-                    //Analyse each potm in folder
-                    foreach (string file in Directory.EnumerateFiles(workingFolder + "\\", "*.potm", SearchOption.AllDirectories))
-                    {
-                        Console.WriteLine("Processing file: " + Path.GetFileName(file));
-                        RunTheJewels(file);
-                    }
-                    //Analyse each potx in folder
-                    foreach (string file in Directory.EnumerateFiles(workingFolder + "\\", "*.potx", SearchOption.AllDirectories))
-                    {
-                        Console.WriteLine("Processing file: " + Path.GetFileName(file));
-                        RunTheJewels(file);
+                        foreach (string file in Directory.EnumerateFiles(workingFolder + "\\", extension, SearchOption.AllDirectories))
+                        {
+                            Console.WriteLine("Processing file: " + Path.GetFileName(file));
+                            RunTheJewels(file);
+                        }
                     }
                 }
                 //Final cleanup
@@ -1019,7 +962,7 @@ namespace MetadataPlus
                                 }
                             }
 
-                            if(additionalGrep != "" && additionalGrep != null && !grep)
+                            if (additionalGrep != "" && additionalGrep != null && !grep)
                             {
                                 //User has supplied a string for us to search for - but this is not being handled by the above grep functionality as NoGrep was specified
                                 //Construct the string of each tag
